@@ -1,0 +1,3 @@
+v0.2 (2019-09-25)
+- tabbed layouts and full screen mode excluded
+- fullscreen_mode detection diversified for i3 and sway
