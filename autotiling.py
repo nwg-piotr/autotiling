@@ -46,7 +46,6 @@ def switch_splitting(i3, e):
 
 def main():
     i3.on(Event.WINDOW_FOCUS, switch_splitting)
-    i3.on(Event.WINDOW_NEW, switch_splitting)
     i3.main()
 
 
