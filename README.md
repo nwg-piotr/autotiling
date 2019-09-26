@@ -19,7 +19,6 @@ to the `~/.config/i3/config` file. **Do not** use `exec_always`.
 
 **Manually**
 
-1. Install the `python-i3ipc` package (or whatever it's called in your Linux distribution). 
-Remember to choose the python3 version.
+1. Install the `python-i3ipc>=2.0.1` package (or whatever it's called in your Linux distribution).
 2. Save the `autotiling.py` file anywhere, make executable and autostart in your i3/sway config file: 
 `exec /path/to/the/script/autotiling.py` on sway or `exec --no-startup-id /path/to/the/script/autotiling.py` on i3.
