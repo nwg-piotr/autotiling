@@ -14,12 +14,7 @@ Inspired by https://github.com/olemartinorg/i3-alternating-layout
 
 1. Install the `autotiling` (AUR) package.
 2. Add `exec autotiling` to the `~/.config/sway/config` or `exec --no-startup-id autotiling` 
-to the `~/.config/i3/config` file. **Do not** use `exec_always`.
-
-**python 3.8 note:**
-
-If you've just updated to python 3.8, the script most likely stopped working. Uninstall both `azote` and `python-i3ipc` 
-packages and install `azote` again.
+to the `~/.config/i3/config` file.
 
 
 **Manually**
