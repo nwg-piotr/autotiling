@@ -1,5 +1,5 @@
 v0.5 (2020-02-19)
-- Check if con exists before querying submembers #2
+- Check if con exists before querying submembers [#2](https://github.com/nwg-piotr/autotiling/pull/2)
 
 v0.4 (2019-12-11)
 - ignoring stacked layouts added [#1](https://github.com/nwg-piotr/autotiling/pull/1)
