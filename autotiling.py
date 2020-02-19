@@ -44,7 +44,6 @@ def switch_splitting(i3, e):
 
     except Exception as e:
         print('Error: {}'.format(e))
-        pass
 
 
 def main():
