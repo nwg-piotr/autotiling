@@ -18,7 +18,6 @@ Dependencies: python-i3ipc>=2.0.1 (i3ipc-python)
 
 from i3ipc import Connection, Event
 
-i3 = Connection()
 
 
 def switch_splitting(i3, e):
@@ -48,6 +47,7 @@ def switch_splitting(i3, e):
 
 def main():
     i3.on(Event.WINDOW_FOCUS, switch_splitting)
+    i3 = Connection()
     i3.main()
 
 
