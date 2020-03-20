@@ -15,6 +15,7 @@ License: GPL3
 
 Dependencies: python-i3ipc>=2.0.1 (i3ipc-python)
 """
+import sys
 
 from i3ipc import Connection, Event
 
@@ -41,7 +42,7 @@ def switch_splitting(i3, e):
                 i3.command(new_layout)
 
     except Exception as e:
-        print('Error: {}'.format(e))
+        print('Error: {}'.format(e), file=sys.stderr)
         pass
 
 
