@@ -45,7 +45,7 @@ def switch_splitting(i3, e, debug):
                     if result[0].success and debug:
                         print('Debug: Switched to {}'.format(new_layout), file=sys.stderr)
                     else:
-                        print('Error: {}'.format(result[0].error), file=sys.stderr)
+                        print('Error: Switch failed with err {}'.format(result[0].error), file=sys.stderr)
 
         elif debug:
             print('Debug: No focused container found', file=sys.stderr)
