@@ -8,7 +8,7 @@ It works on both sway and i3 window managers.
 
 Inspired by https://github.com/olemartinorg/i3-alternating-layout
 
-Author: Piotr Miller
+Copyright: 2019-2020 Piotr Miller & Contributors
 e-mail: nwg.piotr@gmail.com
 Project: https://github.com/nwg-piotr/autotiling
 License: GPL3
