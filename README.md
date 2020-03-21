@@ -13,7 +13,7 @@ Inspired by https://github.com/olemartinorg/i3-alternating-layout
 **Arch Linux**
 
 1. Install the `autotiling` (AUR) package.
-2. Add `exec autotiling` to the `~/.config/sway/config` or `exec --no-startup-id autotiling` 
+2. Add `exec autotiling` to the `~/.config/sway/config` or `exec_always --no-startup-id autotiling` 
 to the `~/.config/i3/config` file.
 
 
@@ -21,4 +21,4 @@ to the `~/.config/i3/config` file.
 
 1. Install the `python-i3ipc>=2.0.1` package (or whatever it's called in your Linux distribution).
 2. Save the `autotiling.py` file anywhere, make executable and autostart in your i3/sway config file: 
-`exec /path/to/the/script/autotiling.py` on sway or `exec --no-startup-id /path/to/the/script/autotiling.py` on i3.
+`exec /path/to/the/script/autotiling.py` on sway or `exec_always --no-startup-id /path/to/the/script/autotiling.py` on i3.
