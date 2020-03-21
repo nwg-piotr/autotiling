@@ -15,13 +15,14 @@ License: GPL3
 
 Dependencies: python-i3ipc>=2.0.1 (i3ipc-python)
 """
+import argparse
+import sys
+from functools import partial
 
 from i3ipc import Connection, Event
 
-i3 = Connection()
 
-
-def switch_splitting(i3, e):
+def switch_splitting(i3, e, debug):
     try:
         con = i3.get_tree().find_focused()
         if con:
@@ -40,14 +41,30 @@ def switch_splitting(i3, e):
             if not is_floating and not is_stacked and not is_tabbed and not is_full_screen:
                 new_layout = 'splitv' if con.rect.height > con.rect.width else 'splith'
                 if new_layout != con.parent.layout:
-                    i3.command(new_layout)
+                    result = i3.command(new_layout)
+                    if result[0].success and debug:
+                        print('Debug: Switched to {}'.format(new_layout), file=sys.stderr)
+                    else:
+                        print('Error: Switch failed with err {}'.format(result[0].error), file=sys.stderr)
+
+        elif debug:
+            print('Debug: No focused container found', file=sys.stderr)
 
     except Exception as e:
-        print('Error: {}'.format(e))
+        print('Error: {}'.format(e), file=sys.stderr)
 
 
 def main():
-    i3.on(Event.WINDOW_FOCUS, switch_splitting)
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--debug',
+        action='store_true',
+        help='Print debug messages to stderr'
+    )
+    args = parser.parse_args()
+    handler = partial(switch_splitting, debug=args.debug)
+    i3 = Connection()
+    i3.on(Event.WINDOW_FOCUS, handler)
     i3.main()
 
 
