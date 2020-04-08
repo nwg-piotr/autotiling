@@ -44,7 +44,7 @@ def switch_splitting(i3, e, debug):
                     result = i3.command(new_layout)
                     if result[0].success and debug:
                         print('Debug: Switched to {}'.format(new_layout), file=sys.stderr)
-                    else:
+                    elif debug:
                         print('Error: Switch failed with err {}'.format(result[0].error), file=sys.stderr)
 
         elif debug:
