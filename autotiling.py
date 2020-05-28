@@ -31,8 +31,7 @@ def switch_splitting(i3, e, debug):
                 is_full_screen = con.fullscreen_mode == 1
             else:                                    # We are on sway
                 is_floating = con.type == 'floating_con'
-                # On sway on 1st focus the parent container returns 1, then forever the focused container itself
-                is_full_screen = con.fullscreen_mode == 1 or con.parent.fullscreen_mode == 1
+                is_full_screen = con.fullscreen_mode == 1
 
             is_stacked = con.parent.layout == 'stacked'
             is_tabbed = con.parent.layout == 'tabbed'
