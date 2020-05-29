@@ -21,7 +21,7 @@ For use with the sway-git package use [autotiling-git](https://aur.archlinux.org
 
 **Manually**
 
-NOTE: Current master branch is only compatible withe the development (not yet released) version of sway.
+NOTE: Current master branch is only compatible with the development (not yet released) version of sway.
 For sway version <= 1.4 you need to use the script from the [sway14 branch](https://github.com/nwg-piotr/autotiling/tree/sway14).
 
 1. Install the `python-i3ipc>=2.0.1` package (or whatever it's called in your Linux distribution).
