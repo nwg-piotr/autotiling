@@ -16,6 +16,8 @@ Inspired by https://github.com/olemartinorg/i3-alternating-layout
 2. Add `exec autotiling` to the `~/.config/sway/config` or `exec_always --no-startup-id autotiling` 
 to the `~/.config/i3/config` file.
 
+For use with the sway-git package use [autotiling-git](https://aur.archlinux.org/packages/autotiling-git).
+
 
 **Manually**
 
