@@ -27,3 +27,7 @@ For sway version <= 1.4 you need to use the script from the [sway14 branch](http
 1. Install the `python-i3ipc>=2.0.1` package (or whatever it's called in your Linux distribution).
 2. Save the `autotiling.py` file anywhere, make executable and autostart in your i3/sway config file: 
 `exec /path/to/the/script/autotiling.py` on sway or `exec_always --no-startup-id /path/to/the/script/autotiling.py` on i3.
+
+**Snap**
+
+`snap install autotiling`
