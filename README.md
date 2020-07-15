@@ -10,6 +10,8 @@ Inspired by https://github.com/olemartinorg/i3-alternating-layout
 
 ## Installation
 
+[![Packaging status](https://repology.org/badge/vertical-allrepos/autotiling.svg)](https://repology.org/project/autotiling/versions)
+
 **Arch Linux**
 
 1. Install the `autotiling` (AUR) package.
