@@ -29,7 +29,7 @@ action](https://img.youtube.com/vi/UWRZuhn92bQ/0.jpg)](https://www.youtube.com/w
      [![Packaging
      status](https://repology.org/badge/vertical-allrepos/autotiling.svg)](https://repology.org/project/autotiling/versions)
 
-     For the sway-git package use
+     For the latest development version use
      [autotiling-git](https://aur.archlinux.org/packages/autotiling-git).
 
    * _Manually_
