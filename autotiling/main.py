@@ -23,39 +23,51 @@ def switch_splitting(i3, e, debug):
     try:
         con = i3.get_tree().find_focused()
         if con:
-            if con.floating:                         # We're on i3: on sway it would be None
-                is_floating = '_on' in con.floating  # May be 'auto_on' or 'user_on'
+            if con.floating:
+                # We're on i3: on sway it would be None
+                # May be 'auto_on' or 'user_on'
+                is_floating = "_on" in con.floating
                 is_full_screen = con.fullscreen_mode == 1
-            else:                                    # We are on sway
-                is_floating = con.type == 'floating_con'
+            else:
+                # We are on sway
+                is_floating = con.type == "floating_con"
                 is_full_screen = con.fullscreen_mode == 1
 
-            is_stacked = con.parent.layout == 'stacked'
-            is_tabbed = con.parent.layout == 'tabbed'
+            is_stacked = con.parent.layout == "stacked"
+            is_tabbed = con.parent.layout == "tabbed"
 
-            # Let's exclude floating containers, stacked layouts, tabbed layouts and full screen mode
-            if not is_floating and not is_stacked and not is_tabbed and not is_full_screen:
-                new_layout = 'splitv' if con.rect.height > con.rect.width else 'splith'
+            # Let's exclude floating containers, stacked layouts, tabbed layouts and
+            # full screen mode
+            if (
+                not is_floating
+                and not is_stacked
+                and not is_tabbed
+                and not is_full_screen
+            ):
+                new_layout = "splitv" if con.rect.height > con.rect.width else "splith"
                 if new_layout != con.parent.layout:
                     result = i3.command(new_layout)
                     if result[0].success and debug:
-                        print('Debug: Switched to {}'.format(new_layout), file=sys.stderr)
+                        print(
+                            "Debug: Switched to {}".format(new_layout), file=sys.stderr
+                        )
                     elif debug:
-                        print('Error: Switch failed with err {}'.format(result[0].error), file=sys.stderr)
+                        print(
+                            "Error: Switch failed with err {}".format(result[0].error),
+                            file=sys.stderr,
+                        )
 
         elif debug:
-            print('Debug: No focused container found', file=sys.stderr)
+            print("Debug: No focused container found", file=sys.stderr)
 
     except Exception as e:
-        print('Error: {}'.format(e), file=sys.stderr)
+        print("Error: {}".format(e), file=sys.stderr)
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--debug',
-        action='store_true',
-        help='Print debug messages to stderr'
+        "--debug", action="store_true", help="Print debug messages to stderr"
     )
     args = parser.parse_args()
     handler = partial(switch_splitting, debug=args.debug)
