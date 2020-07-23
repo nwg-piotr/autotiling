@@ -18,6 +18,8 @@ from functools import partial
 
 from i3ipc import Connection, Event
 
+from .__about__ import __version__
+
 
 def switch_splitting(i3, e, debug):
     try:
@@ -69,6 +71,14 @@ def main():
     parser.add_argument(
         "--debug", action="store_true", help="Print debug messages to stderr"
     )
+    parser.add_argument(
+        "--version",
+        "-v",
+        action="version",
+        version="%(prog)s {}, Python {}".format(__version__, sys.version),
+        help="display version information",
+    )
+
     args = parser.parse_args()
     handler = partial(switch_splitting, debug=args.debug)
     i3 = Connection()
