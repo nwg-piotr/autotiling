@@ -45,8 +45,8 @@ action](https://img.youtube.com/vi/UWRZuhn92bQ/0.jpg)](https://www.youtube.com/w
      snap install autotiling
      ```
 
-   _NOTE:_ The current master branch is compatible with sway >= 1.5. For lower versions
-   you need to use the script from the [sway14
+   _NOTE:_ The current release and master branch is compatible with sway >= 1.5. For
+   lower versions you need to use the script from the [sway14
    branch](https://github.com/nwg-piotr/autotiling/tree/sway14) or the [0.9
    release](https://github.com/nwg-piotr/autotiling/releases/tag/v0.9).
 
