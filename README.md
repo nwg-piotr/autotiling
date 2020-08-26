@@ -36,9 +36,9 @@ action](https://img.youtube.com/vi/UWRZuhn92bQ/0.jpg)](https://www.youtube.com/w
 
      1. Install the `python-i3ipc>=2.0.1` package (or whatever it's called in your Linux
         distribution).
-     2. Save the `autotiling.py` file anywhere, make executable and autostart in your
-        i3/sway config file: `exec /path/to/the/script/autotiling.py` on sway or
-        `exec_always --no-startup-id /path/to/the/script/autotiling.py` on i3.
+     2. Save the `main.py` file anywhere, make executable and autostart in your
+        i3/sway config file: `exec /path/to/the/script/main.py` on sway or
+        `exec_always --no-startup-id /path/to/the/script/main.py` on i3. You can give the `main.py` file another name.
 
    * _Snap_
      ```
