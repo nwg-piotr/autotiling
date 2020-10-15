@@ -18,7 +18,12 @@ from functools import partial
 
 from i3ipc import Connection, Event
 
-from .__about__ import __version__
+
+try:
+    from .__about__ import __version__
+except ImportError:
+    __version__ = "unknown"
+
 
 
 def switch_splitting(i3, e, debug):
@@ -84,3 +89,8 @@ def main():
     i3 = Connection()
     i3.on(Event.WINDOW_FOCUS, handler)
     i3.main()
+
+
+if __name__ == "__main__":
+    # execute only if run as a script
+    main()
