@@ -1,3 +1,7 @@
+v1.3 (2021-01-08)
+- added `--workspaces` argument to restrict autotiling to certain workspaces @riscie
+- code formatting and arguments cleanup
+
 v1.2 (2021-01-04)
 - added --version argument @nschloe
 - allowed autotiling to be run as a script directly @Lqp1
@@ -9,7 +13,7 @@ v1.1 (2020-07-21)
 v1.0 (2020-07-19)
 - changed fullscreen mode detection to reflect changes in sway 1.5 
 [#11](https://github.com/nwg-piotr/autotiling/pull/11) @ammgws
-
+78
 v0.9 (2020-04-08)
 - bug in debugging fixed [#6](https://github.com/nwg-piotr/autotiling/pull/6)
 

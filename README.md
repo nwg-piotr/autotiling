@@ -10,6 +10,21 @@ Inspired by https://github.com/olemartinorg/i3-alternating-layout.
 [![Auto-tiling in
 action](https://img.youtube.com/vi/UWRZuhn92bQ/0.jpg)](https://www.youtube.com/watch?v=UWRZuhn92bQ)
 
+## PLEASE DO READ THIS
+
+This script does one thing: when a window is being focused, it checks it's height / width ratio, and executes
+the equivalent of either `swaymsg splitv` or `swaymsg splith`. Nothing less, nothing more. Yes, it may make
+stacking and tabbed layouts behave oddly. No, nothing can be done about it. If you like stacking/tabbed layouts,
+you may use them on workspaces with autotiling turned off (`--workspaces` argument). Do not submit issues about it. 
+
+For instance, on my triple-headed setup (2 workspaces per output), I configured autotiling to work on odd 
+workspaces, but not on even:
+
+```text
+### Autostart
+  exec autotiling -w 1 3 5
+```
+
 ## Installation
 
 1. Install autotiling. Possible methods:
@@ -53,3 +68,17 @@ action](https://img.youtube.com/vi/UWRZuhn92bQ/0.jpg)](https://www.youtube.com/w
 
 2. Add `exec autotiling` to the `~/.config/sway/config` or `exec_always --no-startup-id
    autotiling` to the `~/.config/i3/config` file.
+
+## Usage
+
+```text
+$ autotiling -h
+usage: autotiling [-h] [-d] [-v] [-w [WORKSPACES ...]]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           Print debug messages to stderr
+  -v, --version         display version information
+  -w [WORKSPACES ...], --workspaces [WORKSPACES ...]
+                        Restricts autotiling to certain workspaces. Example: autotiling --workspaces 8 9
+```
