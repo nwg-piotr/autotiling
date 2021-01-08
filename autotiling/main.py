@@ -65,7 +65,7 @@ def switch_splitting(i3, e, debug, workspaces):
                         )
 
         elif debug:
-            print("Debug: No focused container found", file=sys.stderr)
+            print("Debug: No focused container found or autotiling on workspace turned off", file=sys.stderr)
 
     except Exception as e:
         print("Error: {}".format(e), file=sys.stderr)
