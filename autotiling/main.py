@@ -29,7 +29,7 @@ except ImportError:
 def switch_splitting(i3, e, debug, workspaces):
     try:
         con = i3.get_tree().find_focused()
-        if con and not workspaces or (con.workspace().name in workspaces):
+        if con and not workspaces or (str(con.workspace().num) in workspaces):
             if con.floating:
                 # We're on i3: on sway it would be None
                 # May be 'auto_on' or 'user_on'
