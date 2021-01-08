@@ -26,10 +26,10 @@ except ImportError:
 
 
 
-def switch_splitting(i3, e, debug):
+def switch_splitting(i3, e, debug, workspaces):
     try:
         con = i3.get_tree().find_focused()
-        if con:
+        if con and not workspaces or (str(con.workspace().num) in workspaces):
             if con.floating:
                 # We're on i3: on sway it would be None
                 # May be 'auto_on' or 'user_on'
@@ -65,7 +65,7 @@ def switch_splitting(i3, e, debug):
                         )
 
         elif debug:
-            print("Debug: No focused container found", file=sys.stderr)
+            print("Debug: No focused container found or autotiling on workspace turned off", file=sys.stderr)
 
     except Exception as e:
         print("Error: {}".format(e), file=sys.stderr)
@@ -83,9 +83,21 @@ def main():
         version="%(prog)s {}, Python {}".format(__version__, sys.version),
         help="display version information",
     )
+    parser.add_argument(
+      "--workspaces",
+      "-w",
+      help="Restricts autotiling to certain workspaces. Example: autotiling --workspaces 8 9",
+      nargs="*",
+      type=str,
+      default=[],
+    )
 
     args = parser.parse_args()
-    handler = partial(switch_splitting, debug=args.debug)
+
+    if args.debug and args.workspaces:
+      print("autotiling is only active on workspaces:", ','.join(args.workspaces))
+
+    handler = partial(switch_splitting, debug=args.debug, workspaces=args.workspaces)
     i3 = Connection()
     i3.on(Event.WINDOW_FOCUS, handler)
     i3.main()
