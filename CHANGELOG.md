@@ -1,5 +1,9 @@
+v1.2 (2021-01-04)
+- added --version argument @nschloe
+- allowed autotiling to be run as a script directly @Lqp1
+
 v1.1 (2020-07-21)
-- added proper Python package structure so that could by published on PyPi 
+- added proper Python package structure so that could be published on PyPi 
 [#14](https://github.com/nwg-piotr/autotiling/pull/14) @nschloe
 
 v1.0 (2020-07-19)
