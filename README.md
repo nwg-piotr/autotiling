@@ -55,10 +55,6 @@ workspaces, but not on even:
         i3/sway config file: `exec /path/to/the/script/main.py` on sway or
         `exec_always --no-startup-id /path/to/the/script/main.py` on i3. You can give the `main.py` file another name.
 
-   * _Snap_
-     ```
-     snap install autotiling
-     ```
 
    _NOTE:_ The current release and master branch is compatible with sway >= 1.5. For
    lower versions you need to use the script from the [sway14
