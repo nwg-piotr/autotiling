@@ -13,6 +13,7 @@ License: GPL3
 Dependencies: python-i3ipc>=2.0.1 (i3ipc-python)
 """
 import argparse
+import os
 import sys
 from functools import partial
 
@@ -22,6 +23,26 @@ try:
     from .__about__ import __version__
 except ImportError:
     __version__ = "unknown"
+
+
+def temp_dir():
+    if os.getenv("TMPDIR"):
+        return os.getenv("TMPDIR")
+    elif os.getenv("TEMP"):
+        return os.getenv("TEMP")
+    elif os.getenv("TMP"):
+        return os.getenv("TMP")
+
+    return "/tmp"
+
+
+def save_string(string, file):
+    try:
+        file = open(file, "wt")
+        file.write(string)
+        file.close()
+    except Exception as e:
+        print(e)
 
 
 def switch_splitting(i3, e, debug, workspaces):
@@ -85,6 +106,10 @@ def main():
 
     if args.debug and args.workspaces:
         print("autotiling is only active on workspaces:", ','.join(args.workspaces))
+        
+    # For use w/ nwg-panel
+    if args.workspaces:
+        save_string(','.join(args.workspaces), os.path.join(temp_dir(), "autotiling"))
 
     handler = partial(switch_splitting, debug=args.debug, workspaces=args.workspaces)
     i3 = Connection()
