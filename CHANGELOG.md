@@ -1,5 +1,5 @@
 v1.5 (master)
-- added `Event.BINDING` subscription [#26](https://github.com/nwg-piotr/autotiling/issues/26)
+- added `Event.BINDING` subscription [#26](https://github.com/nwg-piotr/autotiling/issues/26) @mtshrmn
 
 v1.4 (2021-02-24)
 - nwg-panel integration: args.workspaces saved to /tmp/autotiling on start
