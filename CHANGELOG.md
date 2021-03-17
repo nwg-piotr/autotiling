@@ -1,3 +1,9 @@
+v1.5 (master)
+- added `Event.BINDING` subscription [#26](https://github.com/nwg-piotr/autotiling/issues/26)
+
+v1.4 (2021-02-24)
+- nwg-panel integration: args.workspaces saved to /tmp/autotiling on start
+
 v1.3 (2021-01-08)
 - added `--workspaces` argument to restrict autotiling to certain workspaces @riscie
 - code formatting and arguments cleanup
