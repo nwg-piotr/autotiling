@@ -114,6 +114,7 @@ def main():
     handler = partial(switch_splitting, debug=args.debug, workspaces=args.workspaces)
     i3 = Connection()
     i3.on(Event.WINDOW, handler)
+    i3.on(Event.MODE, handler)
     i3.main()
 
 
