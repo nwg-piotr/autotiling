@@ -98,7 +98,7 @@ def main():
                         help="display version information", )
     parser.add_argument("-w",
                         "--workspaces",
-                        help="restricts autotiling to certain workspaces. Example: autotiling --workspaces 8 9",
+                        help="restricts autotiling to certain workspaces; example: autotiling --workspaces 8 9",
                         nargs="*",
                         type=str,
                         default=[], )
@@ -108,7 +108,7 @@ def main():
     """
     parser.add_argument("-e",
                         "--events",
-                        help="list of events to trigger switching split orientation; Default: WINDOW MODE",
+                        help="list of events to trigger switching split orientation; default: WINDOW MODE",
                         nargs="*",
                         type=str,
                         default=["WINDOW", "MODE"])
