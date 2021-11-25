@@ -1,2 +1,5 @@
 /.idea
 /venv
+/autotiling.egg-info/
+/build/
+/dist/
