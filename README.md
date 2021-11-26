@@ -17,64 +17,51 @@ the equivalent of either `swaymsg splitv` or `swaymsg splith`. Nothing less, not
 stacking and tabbed layouts behave oddly. No, nothing can be done about it. If you like stacking/tabbed layouts,
 you may use them on workspaces with autotiling turned off (`--workspaces` argument). Do not submit issues about it. 
 
-For instance, on my triple-headed setup (2 workspaces per output), I configured autotiling to work on odd 
-workspaces, but not on even:
+For instance, you may configure autotiling to work on odd workspaces, but not on even:
 
 ```text
 ### Autostart
-  exec autotiling -w 1 3 5
+  exec autotiling -w 1 3 5 7 9
 ```
 
 ## Installation
 
-1. Install autotiling. Possible methods:
-
-   * _PyPi._
-
-     [![PyPi
-     Version](https://img.shields.io/pypi/v/autotiling.svg?style=flat-square)](https://pypi.org/project/autotiling)
-
-     autotiling is available from PyPi, so you can install it with
-     ```
-     pip install autotiling
-     ```
-
-   * _Arch Linux_
+1. The script has been packaged for the following distributions:
 
      [![Packaging
      status](https://repology.org/badge/vertical-allrepos/autotiling.svg)](https://repology.org/project/autotiling/versions)
 
-     For the latest development version use
+     On Arch Linux for the latest development version you may use
      [autotiling-git](https://aur.archlinux.org/packages/autotiling-git).
 
    * _Manually_
 
      1. Install the `python-i3ipc>=2.0.1` package (or whatever it's called in your Linux
-        distribution).
-     2. Save the `main.py` file anywhere, make executable and autostart in your
-        i3/sway config file: `exec /path/to/the/script/main.py` on sway or
-        `exec_always --no-startup-id /path/to/the/script/main.py` on i3. You can give the `main.py` file another name.
+        distribution);
+     2. save the `main.py` file anywhere, rename to `autotiling`, make executable, move to your bin folder.
 
-
-   _NOTE:_ The current release and master branch is compatible with sway >= 1.5. For
-   lower versions you need to use the script from the [sway14
-   branch](https://github.com/nwg-piotr/autotiling/tree/sway14) or the [0.9
-   release](https://github.com/nwg-piotr/autotiling/releases/tag/v0.9).
-
-
-2. Add `exec autotiling` to the `~/.config/sway/config` or `exec_always --no-startup-id
+2. Add `exec_always autotiling` to the `~/.config/sway/config` or `exec_always --no-startup-id
    autotiling` to the `~/.config/i3/config` file.
 
 ## Usage
 
 ```text
 $ autotiling -h
-usage: autotiling [-h] [-d] [-v] [-w [WORKSPACES ...]]
+usage: autotiling [-h] [-d] [-v] [-w [WORKSPACES ...]] [-e [EVENTS ...]]
 
 optional arguments:
   -h, --help            show this help message and exit
-  -d, --debug           Print debug messages to stderr
+  -d, --debug           print debug messages to stderr
   -v, --version         display version information
   -w [WORKSPACES ...], --workspaces [WORKSPACES ...]
-                        Restricts autotiling to certain workspaces. Example: autotiling --workspaces 8 9
+                        restricts autotiling to certain workspaces; example: autotiling --workspaces 8
+                        9
+  -e [EVENTS ...], --events [EVENTS ...]
+                        list of events to trigger switching split orientation; default: WINDOW MODE
 ```
+
+### Events
+
+Changing event subscription has already been the objective of several pull request. To avoid doing this again and again,
+starting from v1.6 you may specify them in the `-e` | `--events` argument. If no value given, the script will subscribe
+to `Event.WINDOW` and `Event.MODE`, as if it was executed with `autotiling -e WINDOW MODE`.
