@@ -55,12 +55,11 @@ def switch_splitting(i3, e, debug, workspaces):
                 # We're on i3: on sway it would be None
                 # May be 'auto_on' or 'user_on'
                 is_floating = "_on" in con.floating
-                is_full_screen = con.fullscreen_mode == 1
             else:
                 # We are on sway
                 is_floating = con.type == "floating_con"
-                is_full_screen = con.fullscreen_mode == 1
 
+            is_full_screen = con.fullscreen_mode == 1
             is_stacked = con.parent.layout == "stacked"
             is_tabbed = con.parent.layout == "tabbed"
 
