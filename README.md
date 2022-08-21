@@ -31,8 +31,7 @@ The script has been packaged for the following distributions:
  [![Packaging
  status](https://repology.org/badge/vertical-allrepos/autotiling.svg)](https://repology.org/project/autotiling/versions)
 
- On Arch Linux for the latest development version you may use
- [autotiling-git](https://aur.archlinux.org/packages/autotiling-git).
+ [![PyPI version](https://badge.fury.io/py/autotiling.svg)](https://badge.fury.io/py/autotiling)
 
 Installing manually:
 
