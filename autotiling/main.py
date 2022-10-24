@@ -118,8 +118,12 @@ def main():
         print("autotiling is only active on workspaces:", ','.join(args.workspaces))
 
     # For use w/ nwg-panel
+    ws_file = os.path.join(temp_dir(), "autotiling")
     if args.workspaces:
-        save_string(','.join(args.workspaces), os.path.join(temp_dir(), "autotiling"))
+        save_string(','.join(args.workspaces), ws_file)
+    else:
+        if os.path.isfile(ws_file):
+            os.remove(ws_file)
 
     if not args.events:
         print("No events specified", file=sys.stderr)
