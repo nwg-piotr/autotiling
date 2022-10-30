@@ -63,12 +63,21 @@ def switch_splitting(i3, e, debug, workspaces, depth_limit):
                 # Assume we reached the depth limit, unless we can find a workspace
                 depth_limit_reached = True
                 current_con = con
-                for _ in range(depth_limit):
-                    # Check if parent of the current con is a workspace
-                    current_con = current_con.parent
+                current_depth = 0
+                while current_depth < depth_limit:
+                    # Check if we found the workspace of the current container
                     if current_con.type == "workspace":
                         # Found the workspace within the depth limitation
                         depth_limit_reached = False
+                        break
+
+                    # Look at the parent for next iteration
+                    current_con = current_con.parent
+
+                    # Only count up the depth, if the container has more than
+                    # one container as child
+                    if len(current_con.nodes) > 1:
+                        current_depth += 1
 
                 if depth_limit_reached:
                     if debug:
