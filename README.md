@@ -12,17 +12,27 @@ action](https://img.youtube.com/vi/UWRZuhn92bQ/0.jpg)](https://www.youtube.com/w
 
 ## PLEASE DO READ THIS
 
-The script does one thing: it checks the window height / width ratio, and executes
-the equivalent of either `swaymsg splitv` or `swaymsg splith`. Nothing less, nothing more. Yes, it may make
-stacking and tabbed layouts behave oddly. No, nothing can be done about it. If you like stacking/tabbed layouts,
-you may use them on workspaces with autotiling turned off (`--workspaces` argument). Do not submit issues about it. 
+The script does one thing: it checks the window height / width ratio, and
+executes the equivalent of either `swaymsg splitv` or `swaymsg splith`. Nothing
+less, nothing more. This may make stack and tabbed layouts behave oddly.
+Unfortunately, there is nothing that can be done about it – please, do not
+submit issues about it –, but there are two workaround that you can try.
 
-For instance, you may configure autotiling to work on odd workspaces, but not on even:
+One option is, to enable autotiling on certain workspaces only. For instance,
+you could configure autotiling to be enabled on odd workspaces, but not on
+even ones:
 
 ```text
 ### Autostart
-  exec autotiling -w 1 3 5 7 9
+  exec_always autotiling -w 1 3 5 7 9
 ```
+
+Another option you can try, is setting `--limit` and only use stacking or
+tabbing on the lowest level. A good place to start would be `--limit 2`. Open
+four windows with the third and fourth window in the same container as two. This
+might mimic a master-stack layout and you should now be able to switch to
+stacking or tabbed. Beware that the decision on how to split is still based on
+the height / width ratio.
 
 ## Installation
 
@@ -54,6 +64,9 @@ optional arguments:
   -w [WORKSPACES ...], --workspaces [WORKSPACES ...]
                         restricts autotiling to certain workspaces; example: autotiling --workspaces 8
                         9
+  -l LIMIT, --limit LIMIT
+                        limit how often autotiling will split a container; try "2", if you like
+                        master-stack layouts; default: 0 (no limit)
   -e [EVENTS ...], --events [EVENTS ...]
                         list of events to trigger switching split orientation; default: WINDOW MODE
 ```
