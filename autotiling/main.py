@@ -128,7 +128,8 @@ def main():
                         default=[], )
     parser.add_argument("-l",
                         "--limit",
-                        help="limit how often autotiling will split a container; default: 0 (no limit)",
+                        help='limit how often autotiling will split a container; '
+                        'try "2", if you like master-stack layouts; default: 0 (no limit)',
                         type=int,
                         default=0, )
     """
