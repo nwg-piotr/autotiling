@@ -47,8 +47,18 @@ def save_string(string, file):
         print(e)
 
 
-def switch_splitting(i3, e, debug, workspaces, depth_limit):
+def switch_splitting(i3, e, debug, outputs, workspaces, depth_limit):
     try:
+        output = e.ipc_data.get("container", {}).get("output", "")
+        # Stop, if outputs is set and current output is not in the selection
+        if outputs and output not in outputs:
+            if debug:
+                print(
+                    "Debug: Autotiling turned off on output {}".format(output),
+                    file=sys.stderr,
+                )
+            return
+
         con = i3.get_tree().find_focused()
         if con and not workspaces or (str(con.workspace().num) in workspaces):
             if con.floating:
@@ -120,6 +130,13 @@ def main():
                         action="version",
                         version="%(prog)s {}, Python {}".format(__version__, sys.version),
                         help="display version information", )
+    parser.add_argument("-o",
+                        "--outputs",
+                        help="restricts autotiling to certain output; "
+                        "example: autotiling --output  DP-1 HDMI-0",
+                        nargs="*",
+                        type=str,
+                        default=[], )
     parser.add_argument("-w",
                         "--workspaces",
                         help="restricts autotiling to certain workspaces; example: autotiling --workspaces 8 9",
@@ -145,6 +162,9 @@ def main():
 
     args = parser.parse_args()
 
+    if args.debug and args.outputs:
+        print("autotiling is only active on outputs:", ",".join(args.outputs))
+
     if args.debug and args.workspaces:
         print("autotiling is only active on workspaces:", ','.join(args.workspaces))
 
@@ -160,7 +180,13 @@ def main():
         print("No events specified", file=sys.stderr)
         sys.exit(1)
 
-    handler = partial(switch_splitting, debug=args.debug, workspaces=args.workspaces, depth_limit=args.limit)
+    handler = partial(
+        switch_splitting,
+        debug=args.debug,
+        outputs=args.outputs,
+        workspaces=args.workspaces,
+        depth_limit=args.limit,
+    )
     i3 = Connection()
     for e in args.events:
         try:
