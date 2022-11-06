@@ -47,7 +47,7 @@ def save_string(string, file):
         print(e)
 
 
-def switch_splitting(i3, e, debug, workspaces, depth_limit):
+def switch_splitting(i3, e, debug, workspaces, depth_limit, splitwidth, splitheight, splitratio):
     try:
         con = i3.get_tree().find_focused()
         if con and not workspaces or (str(con.workspace().num) in workspaces):
@@ -93,7 +93,7 @@ def switch_splitting(i3, e, debug, workspaces, depth_limit):
                     and not is_stacked
                     and not is_tabbed
                     and not is_full_screen):
-                new_layout = "splitv" if con.rect.height > con.rect.width else "splith"
+                new_layout = "splitv" if con.rect.height > 1/splitratio*con.rect.width else "splith"
 
                 if new_layout != con.parent.layout:
                     result = i3.command(new_layout)
@@ -101,6 +101,14 @@ def switch_splitting(i3, e, debug, workspaces, depth_limit):
                         print("Debug: Switched to {}".format(new_layout), file=sys.stderr)
                     elif debug:
                         print("Error: Switch failed with err {}".format(result[0].error), file=sys.stderr, )
+
+                if e.change == "new" and con.percent:
+                    if con.parent.layout == "splitv": # top / bottom
+                        # print(f"split top fac {splitheight*100}")
+                        i3.command(f"resize set height {int(con.percent*splitheight*100)} ppt")
+                    else:                     # left / right
+                        # print(f"split right fac {splitwidth*100} ")
+                        i3.command(f"resize set width {int(con.percent*splitwidth*100)} ppt")
 
         elif debug:
             print("Debug: No focused container found or autotiling on the workspace turned off", file=sys.stderr)
@@ -132,6 +140,22 @@ def main():
                         'try "2", if you like master-stack layouts; default: 0 (no limit)',
                         type=int,
                         default=0, )
+    parser.add_argument("-sw",
+                        "--splitwidth",
+                        help='set the width of the vertical split (as factor); default: 1.0;',
+                        type=float,
+                        default=1.0, )
+    parser.add_argument("-sh",
+                        "--splitheight",
+                        help='set the height of the horizontal split (as factor); default: 0.5;',
+                        type=float,
+                        default=1, )
+    parser.add_argument("-sr",
+                        "--splitratio",
+                        help='Split direction ratio - based on window height/width; default: 1;'
+                        'try "1.61", for golden ratio - window has to be 61% wider for left/right split; default: 1;',
+                        type=float,
+                        default=1, )
     """
     Changing event subscription has already been the objective of several pull request. To avoid doing this again
     and again, let's allow to specify them in the `--events` argument.
@@ -160,7 +184,7 @@ def main():
         print("No events specified", file=sys.stderr)
         sys.exit(1)
 
-    handler = partial(switch_splitting, debug=args.debug, workspaces=args.workspaces, depth_limit=args.limit)
+    handler = partial(switch_splitting, debug=args.debug, workspaces=args.workspaces, depth_limit=args.limit, splitwidth=args.splitwidth, splitheight=args.splitheight, splitratio=args.splitratio)
     i3 = Connection()
     for e in args.events:
         try:
