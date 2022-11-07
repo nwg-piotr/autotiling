@@ -47,9 +47,21 @@ def save_string(string, file):
         print(e)
 
 
+def output_name(con):
+    if con.type == "root":
+        return None
+
+    if p := con.parent:
+        if p.type == "output":
+            return p.name
+        else:
+            return output_name(p)
+
+
 def switch_splitting(i3, e, debug, outputs, workspaces, depth_limit):
     try:
-        output = e.ipc_data.get("container", {}).get("output", "")
+        con = i3.get_tree().find_focused()
+        output = output_name(con)
         # Stop, if outputs is set and current output is not in the selection
         if outputs and output not in outputs:
             if debug:
@@ -59,7 +71,6 @@ def switch_splitting(i3, e, debug, outputs, workspaces, depth_limit):
                 )
             return
 
-        con = i3.get_tree().find_focused()
         if con and not workspaces or (str(con.workspace().num) in workspaces):
             if con.floating:
                 # We're on i3: on sway it would be None
