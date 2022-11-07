@@ -149,13 +149,13 @@ def main():
                         "--splitheight",
                         help='set the height of the horizontal split (as factor); default: 1.0;',
                         type=float,
-                        default=1, )
+                        default=1.0, )
     parser.add_argument("-sr",
                         "--splitratio",
                         help='Split direction ratio - based on window height/width; default: 1;'
-                        'try "1.61", for golden ratio - window has to be 61% wider for left/right split; default: 1.0;',
+                        'try "1.61", for golden ratio - window has to be 61%% wider for left/right split; default: 1.0;',
                         type=float,
-                        default=1, )
+                        default=1.0, )
     """
     Changing event subscription has already been the objective of several pull request. To avoid doing this again
     and again, let's allow to specify them in the `--events` argument.
