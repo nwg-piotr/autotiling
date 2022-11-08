@@ -18,9 +18,9 @@ less, nothing more. This may make stack and tabbed layouts behave oddly.
 Unfortunately, there is nothing that can be done about it – please, do not
 submit issues about it –, but there are two workaround that you can try.
 
-One option is, to enable autotiling on certain workspaces only. For instance,
-you could configure autotiling to be enabled on odd workspaces, but not on
-even ones:
+One option is, to enable autotiling on certain workspaces or outputs only.
+For instance, you could configure autotiling to be enabled on odd workspaces,
+but not on even ones:
 
 ```text
 ### Autostart
@@ -61,6 +61,9 @@ optional arguments:
   -h, --help            show this help message and exit
   -d, --debug           print debug messages to stderr
   -v, --version         display version information
+  -o [OUTPUTS ...], --outputs [OUTPUTS ...]
+                        restricts autotiling to certain output; example: autotiling --output DP-1
+                        HDMI-0
   -w [WORKSPACES ...], --workspaces [WORKSPACES ...]
                         restricts autotiling to certain workspaces; example: autotiling --workspaces 8
                         9
