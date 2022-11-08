@@ -93,7 +93,7 @@ def switch_splitting(i3, e, debug, workspaces, depth_limit, splitwidth, splithei
                     and not is_stacked
                     and not is_tabbed
                     and not is_full_screen):
-                new_layout = "splitv" if con.rect.height > 1/splitratio*con.rect.width else "splith"
+                new_layout = "splitv" if con.rect.height > con.rect.width/splitratio else "splith"
 
                 if new_layout != con.parent.layout:
                     result = i3.command(new_layout)
