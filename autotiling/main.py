@@ -26,13 +26,14 @@ try:
 except ImportError:
     __version__ = "unknown"
 
+
 def temp_dir():
     return os.getenv("TMPDIR") or os.getenv("TEMP") or os.getenv("TMP") or "/tmp"
 
 
-def save_string(string, file):
+def save_string(string, file_path):
     try:
-       with open(file_path, "wt") as file:
+        with open(file_path, "wt") as file:
             file.write(string)
     except Exception as e:
         print(e)
@@ -120,7 +121,7 @@ def switch_splitting(i3, e, debug, outputs, workspaces, depth_limit):
 
 def main():
     parser = argparse.ArgumentParser()
-    
+
     parser.add_argument("-d", "--debug", action="store_true",
                         help="print debug messages to stderr")
     parser.add_argument("-v", "--version", action="version",
@@ -138,7 +139,6 @@ def main():
     """
     parser.add_argument("-e", "--events", nargs="*", type=str, default=["WINDOW", "MODE"],
                         help="list of events to trigger switching split orientation; default: WINDOW MODE")
-
 
     args = parser.parse_args()
 
