@@ -50,7 +50,7 @@ def output_name(con):
             return output_name(p)
 
 
-def switch_splitting(i3, e, debug, outputs, workspaces, depth_limit):
+def switch_splitting(i3, e, debug, outputs, workspaces, depth_limit, splitwidth, splitheight, splitratio):
     try:
         con = i3.get_tree().find_focused()
         output = output_name(con)
@@ -103,7 +103,7 @@ def switch_splitting(i3, e, debug, outputs, workspaces, depth_limit):
                     and not is_stacked
                     and not is_tabbed
                     and not is_full_screen):
-                new_layout = "splitv" if con.rect.height > con.rect.width else "splith"
+                new_layout = "splitv" if con.rect.height > con.rect.width/splitratio else "splith"
 
                 if new_layout != con.parent.layout:
                     result = i3.command(new_layout)
@@ -111,6 +111,14 @@ def switch_splitting(i3, e, debug, outputs, workspaces, depth_limit):
                         print(f"Debug: Switched to {new_layout}", file=sys.stderr)
                     elif debug:
                         print(f"Error: Switch failed with err {result[0].error}", file=sys.stderr)
+
+                if e.change in ["new","move"] and con.percent:
+                    if con.parent.layout == "splitv" and splitheight != 1.0: # top / bottom
+                        # print(f"split top fac {splitheight*100}")
+                        i3.command(f"resize set height {int(con.percent*splitheight*100)} ppt")
+                    elif con.parent.layout == "splith" and splitwidth != 1.0: # top / bottom:                     # left / right
+                        # print(f"split right fac {splitwidth*100} ")
+                        i3.command(f"resize set width {int(con.percent*splitwidth*100)} ppt")
 
         elif debug:
             print("Debug: No focused container found or autotiling on the workspace turned off", file=sys.stderr)
@@ -133,6 +141,23 @@ def main():
                         help="restricts autotiling to certain workspaces; example: autotiling --workspaces 8 9")
     parser.add_argument("-l", "--limit", type=int, default=0,
                         help='limit how often autotiling will split a container; try "2" if you like master-stack layouts; default: 0 (no limit)')
+    parser.add_argument("-sw",
+                        "--splitwidth",
+                        help='set the width of the vertical split (as factor); default: 1.0;',
+                        type=float,
+                        default=1.0, )
+    parser.add_argument("-sh",
+                        "--splitheight",
+                        help='set the height of the horizontal split (as factor); default: 1.0;',
+                        type=float,
+                        default=1.0, )
+    parser.add_argument("-sr",
+                        "--splitratio",
+                        help='Split direction ratio - based on window height/width; default: 1;'
+                        'try "1.61", for golden ratio - window has to be 61%% wider for left/right split; default: 1.0;',
+                        type=float,
+                        default=1.0, )
+
     """
     Changing event subscription has already been the objective of several pull request. To avoid doing this again
     and again, let's allow to specify them in the `--events` argument.
@@ -166,6 +191,9 @@ def main():
         outputs=args.outputs,
         workspaces=args.workspaces,
         depth_limit=args.limit,
+        splitwidth=args.splitwidth,
+        splitheight=args.splitheight,
+        splitratio=args.splitratio
     )
     i3 = Connection()
     for e in args.events:
