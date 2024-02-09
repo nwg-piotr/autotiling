@@ -103,7 +103,7 @@ def switch_splitting(i3, e, debug, outputs, workspaces, depth_limit, splitwidth,
                     and not is_stacked
                     and not is_tabbed
                     and not is_full_screen):
-                new_layout = "splitv" if con.rect.height > con.rect.width/splitratio else "splith"
+                new_layout = "splitv" if con.rect.height > con.rect.width / splitratio else "splith"
 
                 if new_layout != con.parent.layout:
                     result = i3.command(new_layout)
@@ -112,13 +112,13 @@ def switch_splitting(i3, e, debug, outputs, workspaces, depth_limit, splitwidth,
                     elif debug:
                         print(f"Error: Switch failed with err {result[0].error}", file=sys.stderr)
 
-                if e.change in ["new","move"] and con.percent:
-                    if con.parent.layout == "splitv" and splitheight != 1.0: # top / bottom
+                if e.change in ["new", "move"] and con.percent:
+                    if con.parent.layout == "splitv" and splitheight != 1.0:  # top / bottom
                         # print(f"split top fac {splitheight*100}")
-                        i3.command(f"resize set height {int(con.percent*splitheight*100)} ppt")
-                    elif con.parent.layout == "splith" and splitwidth != 1.0: # top / bottom:                     # left / right
+                        i3.command(f"resize set height {int(con.percent * splitheight * 100)} ppt")
+                    elif con.parent.layout == "splith" and splitwidth != 1.0:  # top / bottom:                     # left / right
                         # print(f"split right fac {splitwidth*100} ")
-                        i3.command(f"resize set width {int(con.percent*splitwidth*100)} ppt")
+                        i3.command(f"resize set width {int(con.percent * splitwidth * 100)} ppt")
 
         elif debug:
             print("Debug: No focused container found or autotiling on the workspace turned off", file=sys.stderr)
@@ -140,7 +140,8 @@ def main():
     parser.add_argument("-w", "--workspaces", nargs="*", type=str, default=[],
                         help="restricts autotiling to certain workspaces; example: autotiling --workspaces 8 9")
     parser.add_argument("-l", "--limit", type=int, default=0,
-                        help='limit how often autotiling will split a container; try "2" if you like master-stack layouts; default: 0 (no limit)')
+                        help='limit how often autotiling will split a container; '
+                             'try "2" if you like master-stack layouts; default: 0 (no limit)')
     parser.add_argument("-sw",
                         "--splitwidth",
                         help='set the width of the vertical split (as factor); default: 1.0;',
@@ -154,7 +155,7 @@ def main():
     parser.add_argument("-sr",
                         "--splitratio",
                         help='Split direction ratio - based on window height/width; default: 1;'
-                        'try "1.61", for golden ratio - window has to be 61%% wider for left/right split; default: 1.0;',
+                             'try "1.61", for golden ratio - window has to be 61%% wider for left/right split; default: 1.0;',
                         type=float,
                         default=1.0, )
 

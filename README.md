@@ -30,7 +30,7 @@ but not on even ones:
 Another option you can try, is setting `--limit` and only use stacking or
 tabbing on the lowest level. A good place to start would be `--limit 2`. Open
 four windows with the third and fourth window in the same container as two. This
-might mimic a master-stack layout and you should now be able to switch to
+might mimic a master-stack layout, and you should now be able to switch to
 stacking or tabbed. Beware that the decision on how to split is still based on
 the height / width ratio.
 
@@ -55,23 +55,37 @@ Installing manually:
 
 ```text
 $ autotiling -h
-usage: autotiling [-h] [-d] [-v] [-w [WORKSPACES ...]] [-e [EVENTS ...]]
+usage: main.py [-h] [-d] [-v] [-o [OUTPUTS ...]] [-w [WORKSPACES ...]]
+               [-l LIMIT] [-sw SPLITWIDTH] [-sh SPLITHEIGHT] [-sr SPLITRATIO]
+               [-e [EVENTS ...]]
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -d, --debug           print debug messages to stderr
   -v, --version         display version information
   -o [OUTPUTS ...], --outputs [OUTPUTS ...]
-                        restricts autotiling to certain output; example: autotiling --output DP-1
-                        HDMI-0
+                        restricts autotiling to certain output; example:
+                        autotiling --output DP-1 HDMI-0
   -w [WORKSPACES ...], --workspaces [WORKSPACES ...]
-                        restricts autotiling to certain workspaces; example: autotiling --workspaces 8
-                        9
+                        restricts autotiling to certain workspaces; example:
+                        autotiling --workspaces 8 9
   -l LIMIT, --limit LIMIT
-                        limit how often autotiling will split a container; try "2", if you like
-                        master-stack layouts; default: 0 (no limit)
+                        limit how often autotiling will split a container; try
+                        "2" if you like master-stack layouts; default: 0 (no
+                        limit)
+  -sw SPLITWIDTH, --splitwidth SPLITWIDTH
+                        set the width of the vertical split (as factor);
+                        default: 1.0;
+  -sh SPLITHEIGHT, --splitheight SPLITHEIGHT
+                        set the height of the horizontal split (as factor);
+                        default: 1.0;
+  -sr SPLITRATIO, --splitratio SPLITRATIO
+                        Split direction ratio - based on window height/width;
+                        default: 1;try "1.61", for golden ratio - window has
+                        to be 61% wider for left/right split; default: 1.0;
   -e [EVENTS ...], --events [EVENTS ...]
-                        list of events to trigger switching split orientation; default: WINDOW MODE
+                        list of events to trigger switching split orientation;
+                        default: WINDOW MODE
 ```
 
 ### Events
@@ -79,5 +93,4 @@ optional arguments:
 Changing event subscription has already been the objective of several pull request. To avoid doing this again and again,
 starting from v1.6 you may specify them in the `-e` | `--events` argument. If no value given, the script will subscribe
 to `Event.WINDOW` and `Event.MODE`, as if it was executed with `autotiling -e WINDOW MODE`. See  
-[altdesktop/i3ipc-python`](https://github.com/altdesktop/i3ipc-python/blob/a670f24e7e04f509de8161cf760afe929c22ae93/i3ipc/events.py#L12)
-for event enumeration.
+[altdesktop/i3ipc-python`](https://github.com/altdesktop/i3ipc-python/blob/a670f24e7e04f509de8161cf760afe929c22ae93/i3ipc/events.py#L12) for event enumeration.
