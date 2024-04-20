@@ -127,8 +127,8 @@ def switch_splitting(i3, e, debug, outputs, workspaces, depth_limit, splitwidth,
         print(f"Error: {e}", file=sys.stderr)
 
 
-def main():
-    parser = argparse.ArgumentParser()
+def get_parser():
+    parser = argparse.ArgumentParser(prog="autotiling", description="Script for sway and i3 to automatically switch the horizontal / vertical window split orientation")
 
     parser.add_argument("-d", "--debug", action="store_true",
                         help="print debug messages to stderr")
@@ -166,7 +166,10 @@ def main():
     parser.add_argument("-e", "--events", nargs="*", type=str, default=["WINDOW", "MODE"],
                         help="list of events to trigger switching split orientation; default: WINDOW MODE")
 
-    args = parser.parse_args()
+    return parser
+
+def main():
+    args = get_parser().parse_args()
 
     if args.debug:
         if args.outputs:
