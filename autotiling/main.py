@@ -94,7 +94,7 @@ def switch_splitting(i3, e, debug, outputs, workspaces, depth_limit, splitwidth,
                         print("Debug: Depth limit reached")
                     return
 
-            is_full_screen = con.fullscreen_mode == 1
+            is_full_screen = con.fullscreen_mode != 0
             is_stacked = con.parent.layout == "stacked"
             is_tabbed = con.parent.layout == "tabbed"
 
